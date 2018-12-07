@@ -90,7 +90,7 @@ com.plat.sharding.props.sql.show=false
 #inline 算法配置  三种算法只能配置一种
 com.plat.sharding.tables.user_info.database.inline.sharding-column=user_id
 com.plat.sharding.tables.user_info.database.inline.algorithm-expression=ds-$->{user_id % 4 % 2}
-#timer 按时间分库配置,目前最多支持按月分库，足够满足需要， table 命名规则如：ds-$->{yyyy} 例子： ds-2018
+#timer 按时间分库配置,目前支持按年，按月分库，足够满足需要， table 命名规则如：ds-$->{yyyy} 例子： ds-2018
 #com.plat.sharding.tables.user_info.database.timer.sharding-column=create_time
 #com.plat.sharding.tables.user_info.database.timer.algorithm-expression=ds-$->{yyyy}
 #coustom-class 自定义类分表配置column
@@ -102,9 +102,9 @@ com.plat.sharding.tables.user_info.database.inline.algorithm-expression=ds-$->{u
 #inline 算法配置
 #com.plat.sharding.tables.user_info.table.inline.sharding-column=user_id
 #com.plat.sharding.tables.user_info.table.inline.algorithm-expression=user_info_$->{user_id % 4 /2}
-#timer 按时间分表配置,目前最多支持按月分表，足够满足需要， table 命名规则如：user_info_$->{yyyy} 例子： user_info_2018
+#timer 按时间分表配置,目前支持按年，按月分表，足够满足需要， table 命名规则如：user_info_$->{yyyyMM} 例子： user_info_201808
 com.plat.sharding.tables.user_info.table.timer.sharding-column=create_time
-com.plat.sharding.tables.user_info.table.timer.algorithm-expression=user_info_$->{yyyy}
+com.plat.sharding.tables.user_info.table.timer.algorithm-expression=user_info_$->{yyyyMM}
 #coustom-class 自定义类分表配置column
 #com.plat.sharding.tables.user_info.table.coustom-class.sharding-column=create_time
 #com.plat.sharding.tables.user_info.table.coustom-class.precise-algorithm-class-name=$->{classname}
