@@ -20,8 +20,8 @@ public class PlatYamlTableRuleConfiguration {
         TableRuleConfiguration result = new TableRuleConfiguration();
         Preconditions.checkNotNull(logicTable, "Logic table cannot be null.");
         result.setLogicTable(logicTable);
-        //result.setActualDataNodes(actualDataNodes);
-        result.setActualDataNodes(null);
+        result.setActualDataNodes(actualDataNodes);
+        //result.setActualDataNodes(null);
         if (null != database) {
 			result.setDatabaseShardingStrategyConfig(database.build());
 		}
