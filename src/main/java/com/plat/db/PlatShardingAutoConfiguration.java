@@ -17,11 +17,11 @@ import org.springframework.core.env.Environment;
 
 import com.google.common.base.Preconditions;
 import com.plat.db.rule.PlatYamlShardingRuleConfiguration;
-import com.plat.db.utils.PropertyUtil;
 
 import io.shardingsphere.core.exception.ShardingException;
 import io.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import io.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration;
+import io.shardingsphere.shardingjdbc.spring.boot.util.PropertyUtil;
 import io.shardingsphere.shardingjdbc.util.DataSourceUtil;
 
 @Configuration
