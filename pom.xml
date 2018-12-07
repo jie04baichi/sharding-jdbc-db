@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.plat</groupId>
+  <artifactId>sharding-db</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>
+		<relativePath />
+	</parent>
+		  
+  	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+
+		<sharding-sphere.version>3.0.0</sharding-sphere.version>
+	</properties>
+  <dependencies>
+  		<!-- alibaba  druid-->
+	  	<dependency>
+	   		<groupId>com.alibaba</groupId>
+	   		<artifactId>druid-spring-boot-starter</artifactId>
+	   		<version>1.1.10</version>
+		</dependency>
+
+  		<!-- sharding jdbc start -->
+         <dependency>
+             <groupId>io.shardingsphere</groupId>
+             <artifactId>sharding-core</artifactId>
+             <version>${sharding-sphere.version}</version>
+         </dependency>
+         <dependency>
+             <groupId>io.shardingsphere</groupId>
+             <artifactId>sharding-jdbc-core</artifactId>
+             <version>${sharding-sphere.version}</version>
+         </dependency>
+         <!--以spring-sharding-jdbc.xml配置文件启动，则不能添加boot配置 -->
+		 <!--  -->
+         <dependency>
+             <groupId>io.shardingsphere</groupId>
+             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+             <version>${sharding-sphere.version}</version>
+         </dependency>
+         
+         <dependency>
+             <groupId>io.shardingsphere</groupId>
+             <artifactId>sharding-jdbc-spring-namespace</artifactId>
+             <version>${sharding-sphere.version}</version>
+         </dependency>
+		<!-- sharding jdbc end -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+	<build>		
+		<plugins>
+			<plugin>  
+			    <groupId>org.apache.maven.plugins</groupId>  
+			    <artifactId>maven-surefire-plugin</artifactId>   
+			    <configuration>   
+			        <skip>true</skip>  
+			    </configuration>  
+			</plugin>  
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<!-- 打成jar包 -->
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<useUniqueVersions>true</useUniqueVersions>
+						</manifest>
+					</archive>
+					<includes> 
+						<include>**/*.class</include>  
+					</includes> 
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>
