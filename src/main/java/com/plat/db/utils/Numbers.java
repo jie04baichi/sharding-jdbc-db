@@ -2,11 +2,19 @@ package com.plat.db.utils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Random;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.plat.db.keygen.SnowFlakeKeyGenerator;
+import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
 import io.shardingsphere.core.exception.ShardingException;
+import io.shardingsphere.core.keygen.DefaultKeyGenerator;
 
 public class Numbers {
-    
+    static Logger logger = LoggerFactory.getLogger(Numbers.class);
     /**
      * Round half up.
      *
@@ -52,4 +60,31 @@ public class Numbers {
         }
         return result;
     }
+    public static void main(String[] args) {
+		//DefaultKeyGenerator generator = new DefaultKeyGenerator();
+		SnowFlakeKeyGenerator generator = new SnowFlakeKeyGenerator();
+
+		int i =0;
+		
+		long oushu = 0;
+		long jishu = 0;
+		long curTime = System.currentTimeMillis();
+		while (i<1000000) {
+			long key = generator.generateKey().longValue();
+			//System.out.println("key = " + key);
+			logger.info("key = " + key);
+
+			if (key % 2 == 0) {
+				oushu ++;
+			}else {
+				jishu ++;
+			}
+			i++;
+		}
+		long endTime = System.currentTimeMillis();
+		
+		
+		System.out.println("偶数 = " + oushu + ", 基数 = " + jishu + ", cost time = " + (endTime - curTime));
+
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import io.shardingsphere.api.config.ShardingRuleConfiguration;
+import io.shardingsphere.core.keygen.KeyGeneratorFactory;
 import io.shardingsphere.core.yaml.sharding.YamlTableRuleConfiguration;
 import lombok.Data;
 @Data
@@ -20,6 +21,8 @@ public class PlatYamlShardingRuleConfiguration {
 
     private Properties props = new Properties();
     
+    private String defaultKeyGeneratorClassName = "com.plat.db.keygen.SnowFlakeKeyGenerator";
+
     //自定义属性
     private Map<String, Object> configMap = new LinkedHashMap<>();
     
@@ -33,7 +36,9 @@ public class PlatYamlShardingRuleConfiguration {
             tableRuleConfig.setLogicTable(entry.getKey());
             result.getTableRuleConfigs().add(tableRuleConfig.build());
         }
-        
+        if (null != defaultKeyGeneratorClassName) {
+            result.setDefaultKeyGenerator(KeyGeneratorFactory.newInstance(defaultKeyGeneratorClassName));
+        }
         return result;
 
     }

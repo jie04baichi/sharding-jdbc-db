@@ -13,7 +13,7 @@ import io.shardingsphere.api.algorithm.sharding.RangeShardingValue;
 import io.shardingsphere.api.algorithm.sharding.standard.RangeShardingAlgorithm;
 import io.shardingsphere.core.util.InlineExpressionParser;
 
-public final class InileRangAlgorithm implements RangeShardingAlgorithm<Integer>{
+public final class InileRangAlgorithm implements RangeShardingAlgorithm<Long>{
 
 	private Logger logger = LoggerFactory.getLogger(InileRangAlgorithm.class);
 
@@ -26,7 +26,7 @@ public final class InileRangAlgorithm implements RangeShardingAlgorithm<Integer>
 	private final Closure<?> closure;
 
 	@Override
-	public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Integer> shardingValue) {
+	public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<Long> shardingValue) {
 				
         Set<String> result = new LinkedHashSet<>();
 

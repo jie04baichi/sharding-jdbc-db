@@ -1,8 +1,10 @@
 package com.plat.db.rule;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 import io.shardingsphere.api.config.TableRuleConfiguration;
+import io.shardingsphere.core.keygen.KeyGeneratorFactory;
 import lombok.Data;
 
 @Data
@@ -15,6 +17,10 @@ public class PlatYamlTableRuleConfiguration {
     private PlatYamlShardingStrategyConfiguration database;
     
     private PlatYamlShardingStrategyConfiguration table;
+    
+    private String keyGeneratorColumnName;
+    
+    private String keyGeneratorClassName;
     
     public TableRuleConfiguration build(){
         TableRuleConfiguration result = new TableRuleConfiguration();
@@ -29,7 +35,10 @@ public class PlatYamlTableRuleConfiguration {
         if (null != table) {
 			result.setTableShardingStrategyConfig(table.build());
 		}
-        
+        if (!Strings.isNullOrEmpty(keyGeneratorClassName)) {
+            result.setKeyGenerator(KeyGeneratorFactory.newInstance(keyGeneratorClassName));
+        }
+        result.setKeyGeneratorColumnName(keyGeneratorColumnName);
         return result;
 
     }
