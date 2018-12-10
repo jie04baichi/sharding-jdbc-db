@@ -50,7 +50,7 @@ public final class TimerPreciseAlgorithm implements PreciseShardingAlgorithm<Dat
 
         for (String each : availableTargetNames) {
         	if (target.startsWith(each)) {
-                logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+shardingValue.getValue()+"], selected target = " + target);
+                //logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+shardingValue.getValue()+"], selected target = " + target);
 				return target;
 			}
         }
@@ -65,7 +65,7 @@ public final class TimerPreciseAlgorithm implements PreciseShardingAlgorithm<Dat
 
         for (String each : availableTargetNames) {
         	if (target.startsWith(each)) {
-                logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+shardingValue.getValue()+"], selected target = " + target);
+                //logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+shardingValue.getValue()+"], selected target = " + target);
 				return target;
 			}
         }

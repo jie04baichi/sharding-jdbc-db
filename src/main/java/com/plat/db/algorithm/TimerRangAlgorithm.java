@@ -53,7 +53,6 @@ public final class TimerRangAlgorithm implements RangeShardingAlgorithm<Date>{
         int endYear = DateUtil.getYear(shardingValue.getValueRange().upperEndpoint());
         
         for (String each : availableTargetNames) {
-        	System.out.println("YearRangTableAlgorithm tableNames each = " + each);
 
 			for (int cur = startYear; cur <= endYear; cur++) {
 				//如：user_info_2019
@@ -90,7 +89,7 @@ public final class TimerRangAlgorithm implements RangeShardingAlgorithm<Date>{
 				String target = StringParser.parse2(algorithmExpression, endwith);
 
 				if (target.startsWith(each)) {
-	                logger.info("########### "+algorithmExpression+" selected target = " + target);
+	                //logger.info("########### "+algorithmExpression+" selected target = " + target);
 					result.add(target);
 				}
 			}
