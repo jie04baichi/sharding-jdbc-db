@@ -2,6 +2,7 @@ package com.plat.db.rule;
 
 import com.google.common.base.Preconditions;
 import com.plat.db.algorithm.InilePreciseAlgorithm;
+import com.plat.db.algorithm.InileRangAlgorithm;
 import com.plat.db.algorithm.TimerPreciseAlgorithm;
 import com.plat.db.algorithm.TimerRangAlgorithm;
 import com.plat.db.rule.strategy.PlatCoustomClassStrategyConfiguration;
@@ -29,7 +30,7 @@ public class PlatYamlShardingStrategyConfiguration {
     	
     	if (inline != null) {
 			strategyConfigCount++;
-			result = new StandardShardingStrategyConfiguration(inline.getShardingColumn(), new InilePreciseAlgorithm(inline.getAlgorithmExpression()));
+			result = new StandardShardingStrategyConfiguration(inline.getShardingColumn(), new InilePreciseAlgorithm(inline.getAlgorithmExpression()), new InileRangAlgorithm(inline.getAlgorithmExpression()));
 		}
     	if (timer != null) {
 			strategyConfigCount++;

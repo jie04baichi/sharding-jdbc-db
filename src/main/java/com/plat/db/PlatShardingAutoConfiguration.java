@@ -59,7 +59,6 @@ public class PlatShardingAutoConfiguration implements EnvironmentAware {
         String dataSources = environment.getProperty(prefix + "names");
         for (String each : dataSources.split(",")) {
             try {
-            	System.out.println(" dataSources each = " + each);
                 Map<String, Object> dataSourceProps = PropertyUtil.handle(environment, prefix + each, Map.class);
                 Preconditions.checkState(!dataSourceProps.isEmpty(), "Wrong datasource properties!");
                 DataSource dataSource = DataSourceUtil.getDataSource(dataSourceProps.get("type").toString(), dataSourceProps);
