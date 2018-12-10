@@ -40,6 +40,10 @@ public class SnowFlakeKeyGenerator implements KeyGenerator {
     
     private static long workerId;
     
+    private static class SingletonPatternHolder {
+        private static final SnowFlakeKeyGenerator singletonPattern = new SnowFlakeKeyGenerator();
+    }
+
     static {
         Calendar calendar = Calendar.getInstance();
         calendar.set(2016, Calendar.NOVEMBER, 1);
@@ -63,7 +67,9 @@ public class SnowFlakeKeyGenerator implements KeyGenerator {
         Preconditions.checkArgument(workerId >= 0L && workerId < WORKER_ID_MAX_VALUE);
         SnowFlakeKeyGenerator.workerId = workerId;
     }
-    
+    public static  long nextValue(){
+    	return SingletonPatternHolder.singletonPattern.generateKey().longValue();
+    }
     /**
      * Generate key.
      * 
