@@ -59,7 +59,7 @@ public final class TimerRangAlgorithm implements RangeShardingAlgorithm<Date>{
 				String target = StringParser.parse2(algorithmExpression, cur);
 				
 				if (target.startsWith(each)) {
-	                logger.info("########### "+algorithmExpression+" selected target = " + target);
+	                //logger.info("########### "+algorithmExpression+" selected target = " + target);
 					result.add(target);
 				}
 			}

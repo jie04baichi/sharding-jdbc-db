@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.EnvironmentAware;
@@ -17,17 +16,15 @@ import org.springframework.core.env.Environment;
 
 import com.google.common.base.Preconditions;
 import com.plat.db.rule.PlatYamlShardingRuleConfiguration;
+import com.plat.db.utils.PropertyUtil;
 
 import io.shardingsphere.core.exception.ShardingException;
 import io.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
-import io.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration;
-import io.shardingsphere.shardingjdbc.spring.boot.util.PropertyUtil;
 import io.shardingsphere.shardingjdbc.util.DataSourceUtil;
 
 @Configuration
 @EnableConfigurationProperties({PlatYamlShardingRuleConfiguration.class})
 @ConditionalOnProperty(prefix="com.plat.sharding", name="enabled", havingValue="true", matchIfMissing=false)
-@AutoConfigureAfter(SpringBootConfiguration.class)
 public class PlatShardingAutoConfiguration implements EnvironmentAware {
     
     

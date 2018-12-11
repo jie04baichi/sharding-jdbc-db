@@ -60,6 +60,7 @@ public final class InileRangAlgorithm implements RangeShardingAlgorithm<Long>{
 							return result;
 						}
 					}
+	                logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+i+"], selected target = " + target);
 	                result.add(target);
 	            }
 	        }

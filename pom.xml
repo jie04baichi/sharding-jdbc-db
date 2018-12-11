@@ -39,13 +39,13 @@
              <version>${sharding-sphere.version}</version>
          </dependency>
          <!--以spring-sharding-jdbc.xml配置文件启动，则不能添加boot配置 -->
-		 <!--  -->
+		 <!--  
          <dependency>
              <groupId>io.shardingsphere</groupId>
              <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
              <version>${sharding-sphere.version}</version>
          </dependency>
-         
+         -->
          <dependency>
              <groupId>io.shardingsphere</groupId>
              <artifactId>sharding-jdbc-spring-namespace</artifactId>

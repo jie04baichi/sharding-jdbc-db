@@ -40,7 +40,7 @@ public final class InilePreciseAlgorithm implements PreciseShardingAlgorithm<Lon
 
         for (String each : availableTargetNames) {
             if (target.startsWith(each)) {
-                //logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+shardingValue.getValue()+"], selected target = " + target);
+                logger.info("########### "+algorithmExpression+", columnName["+shardingValue.getColumnName()+"] value["+shardingValue.getValue()+"], selected target = " + target);
                 return target;
             }
         }
