@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.plat.db.utils.DateUtil;
-import com.plat.db.utils.StringParser;
+import com.plat.db.utils.StringParserUtil;
 
 import io.shardingsphere.api.algorithm.sharding.PreciseShardingValue;
 import io.shardingsphere.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
@@ -20,7 +20,7 @@ public final class TimerPreciseAlgorithm implements PreciseShardingAlgorithm<Dat
 
 	public TimerPreciseAlgorithm(String ale){
 		 this.algorithmExpression = InlineExpressionParser.handlePlaceHolder(ale.trim());
-		 this.dateFormat = StringParser.getText(algorithmExpression, "${", "}");
+		 this.dateFormat = StringParserUtil.getText(algorithmExpression, "${", "}");
 	     Preconditions.checkArgument(DateUtil.isValidFormat(dateFormat), "Only allow the correct time format, Example : demo_${yyyyMM}. error : " + algorithmExpression);
 	}
 	
@@ -46,7 +46,7 @@ public final class TimerPreciseAlgorithm implements PreciseShardingAlgorithm<Dat
 		int shardYear = DateUtil.getYear(shardingValue.getValue());
 		
     	//如：user_info_2019		
-		String target = StringParser.parse2(algorithmExpression, shardYear);
+		String target = StringParserUtil.parse2(algorithmExpression, shardYear);
 
         for (String each : availableTargetNames) {
         	if (target.startsWith(each)) {
@@ -61,7 +61,7 @@ public final class TimerPreciseAlgorithm implements PreciseShardingAlgorithm<Dat
 		String shardMonth = DateUtil.getDateMonthString(shardingValue.getValue());
 		
     	//如：user_info_201908	
-		String target = StringParser.parse2(algorithmExpression, shardMonth);
+		String target = StringParserUtil.parse2(algorithmExpression, shardMonth);
 
         for (String each : availableTargetNames) {
         	if (target.startsWith(each)) {

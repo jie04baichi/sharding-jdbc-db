@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.plat.db.utils.DateUtil;
-import com.plat.db.utils.StringParser;
+import com.plat.db.utils.StringParserUtil;
 
 import io.shardingsphere.api.algorithm.sharding.RangeShardingValue;
 import io.shardingsphere.api.algorithm.sharding.standard.RangeShardingAlgorithm;
@@ -22,7 +22,7 @@ public final class TimerRangAlgorithm implements RangeShardingAlgorithm<Date>{
 
 	public TimerRangAlgorithm(String ale){
 		 this.algorithmExpression = InlineExpressionParser.handlePlaceHolder(ale.trim());
-		 this.dateFormat = StringParser.getText(algorithmExpression, "${", "}");
+		 this.dateFormat = StringParserUtil.getText(algorithmExpression, "${", "}");
 	     Preconditions.checkArgument(DateUtil.isValidFormat(dateFormat), "Only allow the correct time format, Example : demo_${yyyyMM}. error : " + algorithmExpression);
 	}
 	
@@ -56,7 +56,7 @@ public final class TimerRangAlgorithm implements RangeShardingAlgorithm<Date>{
 
 			for (int cur = startYear; cur <= endYear; cur++) {
 				//如：user_info_2019
-				String target = StringParser.parse2(algorithmExpression, cur);
+				String target = StringParserUtil.parse2(algorithmExpression, cur);
 				
 				if (target.startsWith(each)) {
 	                //logger.info("########### "+algorithmExpression+" selected target = " + target);
@@ -86,7 +86,7 @@ public final class TimerRangAlgorithm implements RangeShardingAlgorithm<Date>{
 				//如：user_info_201908
 				String endwith = DateUtil.increaseYearMonth(startMonthStr, cur);
 
-				String target = StringParser.parse2(algorithmExpression, endwith);
+				String target = StringParserUtil.parse2(algorithmExpression, endwith);
 
 				if (target.startsWith(each)) {
 	                //logger.info("########### "+algorithmExpression+" selected target = " + target);

@@ -13,8 +13,8 @@ import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 import io.shardingsphere.core.exception.ShardingException;
 import io.shardingsphere.core.keygen.DefaultKeyGenerator;
 
-public class Numbers {
-    static Logger logger = LoggerFactory.getLogger(Numbers.class);
+public class NumberUtil {
+    static Logger logger = LoggerFactory.getLogger(NumberUtil.class);
     /**
      * Round half up.
      *
