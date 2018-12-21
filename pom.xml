@@ -17,7 +17,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 
-		<sharding-sphere.version>3.0.0</sharding-sphere.version>
+		<sharding-sphere.version>3.1.0.M1</sharding-sphere.version>
 	</properties>
   <dependencies>
   		<!-- alibaba  druid-->

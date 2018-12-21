@@ -8,6 +8,7 @@ import io.shardingsphere.core.keygen.DefaultKeyGenerator;
 import io.shardingsphere.core.keygen.KeyGenerator;
 import io.shardingsphere.core.keygen.TimeService;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 /**
  * @ClassName : SnowFlakeKey 
@@ -40,6 +41,8 @@ public class SnowFlakeKeyGenerator implements KeyGenerator {
     
     private static long workerId;
     
+    private static int maxTolerateTimeDifferenceMilliseconds;
+
     private static class SingletonPatternHolder {
         private static final SnowFlakeKeyGenerator singletonPattern = new SnowFlakeKeyGenerator();
     }
@@ -56,7 +59,7 @@ public class SnowFlakeKeyGenerator implements KeyGenerator {
     
     private long sequence;
     
-    private long lastTime;
+    private long lastMilliseconds;
     
     /**
      * Set work process id.
@@ -77,11 +80,13 @@ public class SnowFlakeKeyGenerator implements KeyGenerator {
      */
     @Override
     public synchronized Number generateKey() {
-        long currentMillis = timeService.getCurrentMillis();
-        Preconditions.checkState(lastTime <= currentMillis, "Clock is moving backwards, last time is %d milliseconds, current time is %d milliseconds", lastTime, currentMillis);
-        if (lastTime == currentMillis) {
+        long currentMilliseconds = timeService.getCurrentMillis();
+        if (waitTolerateTimeDifferenceIfNeed(currentMilliseconds)) {
+            currentMilliseconds = timeService.getCurrentMillis();
+        }        
+        if (lastMilliseconds == currentMilliseconds) {
             if (0L == (sequence = (sequence + 1) & SEQUENCE_MASK)) {
-                currentMillis = waitUntilNextTime(currentMillis);
+            	currentMilliseconds = waitUntilNextTime(currentMilliseconds);
             }
         } 
         else {
@@ -90,10 +95,20 @@ public class SnowFlakeKeyGenerator implements KeyGenerator {
             }
         }
 
-        lastTime = currentMillis;
-        return ((currentMillis - EPOCH) << TIMESTAMP_LEFT_SHIFT_BITS) | (workerId << WORKER_ID_LEFT_SHIFT_BITS) | sequence;
+        lastMilliseconds = currentMilliseconds;
+        return ((currentMilliseconds - EPOCH) << TIMESTAMP_LEFT_SHIFT_BITS) | (workerId << WORKER_ID_LEFT_SHIFT_BITS) | sequence;
     }
-    
+    @SneakyThrows
+    private boolean waitTolerateTimeDifferenceIfNeed(final long currentMilliseconds) {
+        if (lastMilliseconds <= currentMilliseconds) {
+            return false;
+        }
+        long timeDifferenceMilliseconds = lastMilliseconds - currentMilliseconds;
+        Preconditions.checkState(timeDifferenceMilliseconds > maxTolerateTimeDifferenceMilliseconds, 
+                "Clock is moving backwards, last time is %d milliseconds, current time is %d milliseconds", lastMilliseconds, currentMilliseconds);
+        Thread.sleep(timeDifferenceMilliseconds);
+        return true;
+    }
     private long waitUntilNextTime(final long lastTime) {
         long time = timeService.getCurrentMillis();
         while (time <= lastTime) {

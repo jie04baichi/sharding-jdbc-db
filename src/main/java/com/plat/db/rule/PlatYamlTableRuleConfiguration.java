@@ -3,7 +3,7 @@ package com.plat.db.rule;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
-import io.shardingsphere.api.config.TableRuleConfiguration;
+import io.shardingsphere.api.config.rule.TableRuleConfiguration;
 import io.shardingsphere.core.keygen.KeyGeneratorFactory;
 import lombok.Data;
 

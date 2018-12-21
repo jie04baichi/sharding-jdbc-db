@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import io.shardingsphere.api.config.ShardingRuleConfiguration;
+import io.shardingsphere.api.config.rule.ShardingRuleConfiguration;
 import io.shardingsphere.core.keygen.KeyGeneratorFactory;
 import io.shardingsphere.core.yaml.sharding.YamlTableRuleConfiguration;
 import lombok.Data;
