@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.plat</groupId>
-  <artifactId>sharding-db</artifactId>
+  <artifactId>sharding-db-spring-boot-starter</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
@@ -39,19 +39,34 @@
              <version>${sharding-sphere.version}</version>
          </dependency>
          <!--以spring-sharding-jdbc.xml配置文件启动，则不能添加boot配置 -->
-		 <!--  
+		 <!--  -->
          <dependency>
              <groupId>io.shardingsphere</groupId>
              <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
              <version>${sharding-sphere.version}</version>
          </dependency>
-         -->
+         
          <dependency>
              <groupId>io.shardingsphere</groupId>
              <artifactId>sharding-jdbc-spring-namespace</artifactId>
              <version>${sharding-sphere.version}</version>
          </dependency>
+         <!--  -->
+		<dependency>
+		    <groupId>io.shardingsphere</groupId>
+		    <artifactId>sharding-transaction-2pc-xa</artifactId>
+		    <version>${sharding-sphere.version}</version>
+		</dependency>
 		<!-- sharding jdbc end -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-configuration-processor</artifactId>
+	        <optional>true</optional>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-autoconfigure</artifactId>
+	    </dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
