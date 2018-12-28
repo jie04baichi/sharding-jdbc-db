@@ -51,10 +51,15 @@
              <artifactId>sharding-jdbc-spring-namespace</artifactId>
              <version>${sharding-sphere.version}</version>
          </dependency>
-         <!--  -->
+         <!-- xa  transaction 2pc -->
 		<dependency>
 		    <groupId>io.shardingsphere</groupId>
 		    <artifactId>sharding-transaction-2pc-xa</artifactId>
+		    <version>${sharding-sphere.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.shardingsphere</groupId>
+		    <artifactId>sharding-transaction-spring</artifactId>
 		    <version>${sharding-sphere.version}</version>
 		</dependency>
 		<!-- sharding jdbc end -->
